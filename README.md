@@ -11,163 +11,133 @@ testing - controller, service, request, response, config, model, mapper, util, c
 Host name - http://localhost:8080
 
 Context root: /camera/v1
+# Sony Camera API
 
-For CREATE use Post
--------------------
+## Overview
 
-Resource URI: /dslr
+This API manages Sony camera products, allowing CRUD operations.
 
-http response status: 200 ok, 201 created
-for bad payload: 400 bad request
+## Installation
 
-request
+Clone the repository and install dependencies:
 
+```bash
+git clone https://github.com/your_username/sony-camera-api.git
+cd sony-camera-api
+npm install
+```
+
+## Usage
+
+- Base URL: `http://localhost:8080/camera/v1`
+
+### Create a Camera (POST)
+
+- Endpoint: `/dslr`
+- Request Body:
+
+```json
 {
-"model": "Alpha A7 III",
-"resolution": "24.2 MP",
-"sensorType": "Full-frame CMOS",
-"price": 1999.99,
-"features": ["4K video recording", "5-axis in-body image stabilization"]
+  "model": "Alpha A7 III",
+  "resolution": "24.2 MP",
+  "sensorType": "Full-frame CMOS",
+  "price": 1999.99,
+  "features": ["4K video recording", "5-axis in-body image stabilization"]
 }
+```
 
-response
+- Response Body (201 Created):
 
+```json
 {
-"id": "hjfdhdhdhghh"
-"model": "Alpha A7 III",
-"resolution": "24.2 MP",
-"sensorType": "Full-frame CMOS",
-"price": 1999.99,
-"features": ["4K video recording", "5-axis in-body image stabilization"],
-"status": "Created"
+  "id": "hjfdhdhdhghh",
+  "model": "Alpha A7 III",
+  "resolution": "24.2 MP",
+  "sensorType": "Full-frame CMOS",
+  "price": 1999.99,
+  "features": ["4K video recording", "5-axis in-body image stabilization"],
+  "status": "Created"
 }
+```
 
+### Read a Camera (GET)
 
-For Read use GET
-----------------
+- Endpoint: `/dslr/{id}`
+- Response Body (200 OK):
 
-resource URI: /{id}
-
-http response status: 200 ok
-for bad payload: 400 bad request
-
-responce
-
+```json
 {
-"id": "hjfdhdhdhghh"
-"model": "Alpha A7 III",
-"resolution": "24.2 MP",
-"sensorType": "Full-frame CMOS",
-"price": 1999.99,
-"features": ["4K video recording", "5-axis in-body image stabilization"],
-"status": "Created"
+  "id": "hjfdhdhdhghh",
+  "model": "Alpha A7 III",
+  "resolution": "24.2 MP",
+  "sensorType": "Full-frame CMOS",
+  "price": 1999.99,
+  "features": ["4K video recording", "5-axis in-body image stabilization"],
+  "status": "Created"
 }
+```
 
+### Update a Camera (PUT)
 
-For Update use put
-------------------
+- Endpoint: `/dslr/{id}`
+- Request Body:
 
-resource URI: /{id}
-
-http response status: 200 ok
-for bad payload: 400 bad request
-
-request
+```json
 {
-"sensorType": "Full-frame CMOS",
-"price": 1000000.00,
-"features": ["8K video recording", "5-axis in-body image stabilization"]
+  "sensorType": "Full-frame CMOS",
+  "price": 1000000.00,
+  "features": ["8K video recording", "5-axis in-body image stabilization"]
 }
+```
 
-response
+- Response Body (200 OK):
 
+```json
 {
-"id": "hjfdhdhdhghh"
-"model": "Alpha A7 III",
-"resolution": "24.2 MP",
-"sensorType": "Full-frame CMOS",
-"price": 1000000.00,
-"features": ["8K video recording", "5-axis in-body image stabilization"],
-"status": "Updated"
+  "id": "hjfdhdhdhghh",
+  "model": "Alpha A7 III",
+  "resolution": "24.2 MP",
+  "sensorType": "Full-frame CMOS",
+  "price": 1000000.00,
+  "features": ["8K video recording", "5-axis in-body image stabilization"],
+  "status": "Updated"
 }
+```
 
+### Delete a Camera (DELETE)
 
-For Delete use delete
+- Endpoint: `/dslr/{id}`
+- Response: 204 No Content
 
-204 no content
+## Testing
 
-resource URI: /{id}
+### Postman
 
-response
-none
+#### Create a Camera
 
+- Method: POST
+- Endpoint: `http://localhost:8080/camera/v1/dslr`
+- Request Body: (see above example)
+- Expected Response: 201 Created with the created camera object
 
+#### Read a Camera
 
-TESTING STRETEGIES
+- Method: GET
+- Endpoint: `http://localhost:8080/camera/v1/dslr/{id}`
+- Expected Response: 200 OK with the requested camera object
 
-POST
+#### Update a Camera
 
-resource endpoint - http://localhost:8080/camera/v1/dslr
+- Method: PUT
+- Endpoint: `http://localhost:8080/camera/v1/dslr/{id}`
+- Request Body: (see above example)
+- Expected Response: 200 OK with the updated camera object
 
-request body
-------------
-{
-"model": "Alpha A7 III",
-"resolution": "24.2 MP",
-"sensorType": "Full-frame CMOS",
-"price": 1999.99,
-"features": ["4K video recording", "5-axis in-body image stabilization"]
-}
+#### Delete a Camera
 
-
-response body
--------------
-{
-"id": "hjfdhdhdhghh"
-"model": "Alpha A7 III",
-"resolution": "24.2 MP",
-"sensorType": "Full-frame CMOS",
-"price": 1999.99,
-"features": ["4K video recording", "5-axis in-body image stabilization"],
-"status": "Created"
-}
-
-
-usecase1 -
-
-steps
-1. Go to the Postman
-2. Select request method as POST
-3. Input the endpoint
-4. go to request body, and then raw use JSON
-5. write data in JSON format
-6. Hit and send
-
-Expected Response
------------------
-
-should return 201 created with response body in case of successful creation
-should return 400 Bad request in case of bad payload.
-
-
-
-
-GET
-
-resource endpoint - http://localhost:8080/camera/v1/dslr/{id}
-
-responce body
---------------
-
-{
-"id": "hjfdhdhdhghh"
-"model": "Alpha A7 III",
-"resolution": "24.2 MP",
-"sensorType": "Full-frame CMOS",
-"price": 1999.99,
-"features": ["4K video recording", "5-axis in-body image stabilization"],
-"status": "Created"
-}
+- Method: DELETE
+- Endpoint: `http://localhost:8080/camera/v1/dslr/{id}`
+- Expected Response: 204 No Content
 
 usecase 1 -
 
