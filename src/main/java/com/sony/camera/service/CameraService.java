@@ -1,4 +1,7 @@
 package com.sony.camera.service;
 
-public class CameraService {
+import com.sony.camera.response.CameraResponse;
+
+public interface CameraService {
+    CameraResponse findCameraById(String id);
 }
